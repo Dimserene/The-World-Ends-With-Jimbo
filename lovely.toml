@@ -53,20 +53,7 @@ if G.GAME.twewy_playmate_beam and G.GAME.twewy_playmate_beam ~= 0 then
     (G.GAME.twewy_playmate_beam)
     local new_card = G.P_CARDS[newCode..newVal]
 	card:set_base(new_card)
-else
-	card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')
-end
-'''
-match_indent = false
-
-# Natural Puppy Deck - Cards in standard packs are face cards
-[[patches]]
-[patches.pattern]
-target = "card.lua"
-pattern = '''card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')'''
-position = "at"
-payload = '''
-if G.GAME.twewy_naturalPuppyDeck then
+elseif G.GAME.twewy_naturalPuppyDeck then
 	playmate_suit = pseudorandom_element({'S','H','D','C'}, pseudoseed('naturalPuppy'))
 	card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')
 	local newCode = playmate_suit.."_"
@@ -78,6 +65,26 @@ else
 end
 '''
 match_indent = false
+
+# Natural Puppy Deck - Cards in standard packs are face cards
+#[[patches]]
+#[patches.pattern]
+#target = "card.lua"
+#pattern = '''card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')'''
+#position = "at"
+#payload = '''
+#if G.GAME.twewy_naturalPuppyDeck then
+#	playmate_suit = pseudorandom_element({'S','H','D','C'}, pseudoseed('naturalPuppy'))
+#	card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')
+#	local newCode = playmate_suit.."_"
+#    local newVal = pseudorandom_element({'J','K','Q'}, pseudoseed('naturalPuppy'))
+#    local new_card = G.P_CARDS[newCode..newVal]
+#	card:set_base(new_card)
+#else
+#	card = create_card((pseudorandom(pseudoseed('stdset'..G.GAME.round_resets.ante)) > 0.6) and "Enhanced" or "Base", G.pack_cards, nil, nil, nil, true, nil, 'sta')
+#end
+#'''
+#match_indent = false
 
 # Natural Puppy Deck - Standard packs have X extra rewards
 [[patches]]
